@@ -1,0 +1,10 @@
+[package]
+name = "tokio-by-hand"
+version = "0.0.0"
+authors = ["Casey Rodarmor <casey@rodarmor.com>"]
+
+[dependencies]
+futures    = "0.1.16"
+rand       = "0.3.16"
+tokio-core = "0.1.9"
+void       = "1.0.2"
