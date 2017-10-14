@@ -1,7 +1,10 @@
 [package]
-name = "tokio-by-hand"
-version = "0.0.0"
-authors = ["Casey Rodarmor <casey@rodarmor.com>"]
+name        = "tokio-by-hand"
+version     = "0.0.0"
+description = "simple futures"
+authors     = ["Casey Rodarmor <casey@rodarmor.com>"]
+license     = "WTFPL OR MIT OR Apache-2.0"
+homepage    = "https://github.com/casey/tokio-by-hand"
 
 [dependencies]
 futures    = "0.1.16"
