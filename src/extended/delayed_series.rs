@@ -1,6 +1,7 @@
 use common::*;
 use extended::common::*;
 
+/// A Stream that produces a random `u8` every second
 #[derive(Debug)]
 pub struct Producer {
   next: extended::delayed::Producer,
@@ -32,6 +33,7 @@ impl Stream for Producer {
   }
 }
 
+/// A Stream that consumes a `u8` every second
 pub struct Consumer {
   sending: Option<extended::delayed::Consumer>,
 }

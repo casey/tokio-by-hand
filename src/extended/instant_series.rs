@@ -1,6 +1,7 @@
 use common::*;
 use extended::common::*;
 
+/// A Stream that produces a stream of random `u8`s with no delay
 #[derive(Debug)]
 pub struct Producer {
   next: extended::instant::Producer,
@@ -32,6 +33,7 @@ impl Stream for Producer {
   }
 }
 
+/// A Sink that consumes `u8`s with no delay
 pub struct Consumer {
   sending: Option<extended::instant::Consumer>,
 }

@@ -7,6 +7,8 @@ pub struct Incoming(u8);
 #[derive(Debug)]
 pub struct Outgoing(u8);
 
+/// A `Sink + Stream` that does some trivial processing on an
+/// underlying `Sink + Stream`
 pub struct Adapter {
   buffer:      VecDeque<u8>,
   outstanding: u64,

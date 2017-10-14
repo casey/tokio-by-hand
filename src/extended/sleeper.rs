@@ -1,6 +1,7 @@
 use common::*;
 use extended::common::*;
 
+/// A future which resolves after a given duration
 pub struct Sleeper {
   until: Instant,
 }
