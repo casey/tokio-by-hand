@@ -39,7 +39,9 @@ When implementing them, my main difficulties in understanding the futures model 
 
 After figuring out where my difficulties lay, I created a modified futures API that would make it hard to avoid these same mistakes.
 
-You can see the API in the `extended` module. It adds an explicit `TaskHandle` to `poll`, `start_send`, and `poll_complete`. This was to help with #1. To help with #2, I extended the `Async` and `AsyncSink` types to also, when not ready, contain an `AgreementToNotify` value.
+You can see the API in the `extended` module. I re-implemented everything in the `standard` module with the `extended` API, and found it much easier to understand why everything was happening.
+
+It adds an explicit `TaskHandle` to `poll`, `start_send`, and `poll_complete`. This was to help with #1. To help with #2, I extended the `Async` and `AsyncSink` types to also, when not ready, contain an `AgreementToNotify` value.
 
 An `AgreementToNotify` value is is obtained by calling `TaskHandle::i_will_notify()`, which returns `(Task, AgreementToNotify)`. (Internally, the `Task` is obtained from `task::current()`.) The name of the method is admittadly a bit on-the-nose, but the idea is to mark in your future implementation the point where you're actually getting the current task so that you can notify it in the future.
 
