@@ -11,9 +11,9 @@ My experience was basically that the provided combinators were easy enough to us
 
 There were a couple reasons that sometimes the combinators weren't enough:
 
-1. Program organization. I had a huge mass of combinator calls that did everything I wanted, but it was all in a single function and was difficult to read and debug. I was reading from the websocket, writing back control messages to the websocket, deserializing text from the websocket into my local structures, and serializing higher-level control messages to text and writing them back into the websocket.  
+1. Program organization. I had a huge mass of combinator calls that did everything I wanted, but it was all in a single function and was difficult to read and debug. I was reading from the websocket, writing back control messages to the websocket, deserializing text from the websocket into my local structures, and serializing higher-level control messages to text and writing them back into the websocket.
   
-  My thought was that I could abstract deserialization, serialization, and low level management of the websocket into another Sink + Stream over the higher level, deserialized types, but this meant implementing a future myself, which is much more difficult than successfully using combinators.
+    My thought was that I could abstract deserialization, serialization, and low level management of the websocket into another Sink + Stream over the higher level, deserialized types, but this meant implementing a future myself, which is much more difficult than successfully using combinators.
 
 2. Crazy types. I found that combinators generally produced incomprehensible types. If I implemented my own concrete futures over concrete types, the program would be much much simpler. Boxing sort of worked, but sometimes type inference failed in baffling ways, and I needed a lot of annotations to coax things in the correct types
 
@@ -31,9 +31,9 @@ I implemented the following futures:
 
 When implementing them, my main difficulties in understanding the futures model were as follows:
 
-1. I found the lack of an explicit task argument to be very confusing. It wasn't obvious to me what a task was, how one was created, what it represented, and how a task could be notified.  
+1. I found the lack of an explicit task argument to be very confusing. It wasn't obvious to me what a task was, how one was created, what it represented, and how a task could be notified.
 
-  I thought about commenting on https://github.com/alexcrichton/futures-rs/issues/129 , but I felt like it would mostly be a "me too" comment, so I held off.
+    I thought about commenting on https://github.com/alexcrichton/futures-rs/issues/129 , but I felt like it would mostly be a "me too" comment, so I held off.
 
 2. Understanding when a future had "done enough" to ensure that it would make progress in the future. More than a few times I would implement a future and expect it work, but hadn't actually arranged, directly or indirectly, for the task to be notified, so everything would hang.
 
