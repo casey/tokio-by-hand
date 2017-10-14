@@ -1,14 +1,14 @@
 use common::*;
-use standard::common::*;
+use standard;
 
 #[derive(Debug)]
 pub struct Producer {
-  next:   delayed::Producer,
+  next:   standard::delayed::Producer,
 }
 
 impl Producer {
   pub fn new() -> Producer {
-    Producer{next: delayed::Producer::new()}
+    Producer{next: standard::delayed::Producer::new()}
   }
 }
 
@@ -17,13 +17,13 @@ impl Stream for Producer {
   type Error = Void;
   fn poll(&mut self) -> Poll<Option<Self::Item>, Self::Error> {
     let next = try_ready!(self.next.poll());
-    self.next = delayed::Producer::new();
+    self.next = standard::delayed::Producer::new();
     Ok(Async::Ready(Some(next)))
   }
 }
 
 pub struct Consumer {
-  sending: Option<delayed::Consumer>,
+  sending: Option<standard::delayed::Consumer>,
 }
 
 impl Consumer {
@@ -44,7 +44,7 @@ impl Sink for Consumer {
     if self.sending.is_some() {
       Ok(AsyncSink::NotReady(item))
     } else {
-      self.sending = Some(delayed::Consumer::new(item));
+      self.sending = Some(standard::delayed::Consumer::new(item));
       Ok(AsyncSink::Ready)
     }
   }
@@ -67,7 +67,7 @@ mod tests {
     let mut core = Core::new().unwrap();
     let start = Instant::now();
     let producer = Producer::new().take(5);
-    let consumer = instant_series::Consumer::new();
+    let consumer = standard::instant_series::Consumer::new();
     core.run(producer.forward(consumer)).unwrap();
 
     let elapsed = start.elapsed();
@@ -79,7 +79,7 @@ mod tests {
   fn values_take_one_second_to_consume() {
     let mut core = Core::new().unwrap();
     let start = Instant::now();
-    let producer = instant_series::Producer::new().take(5);
+    let producer = standard::instant_series::Producer::new().take(5);
     let consumer = Consumer::new();
 
     core.run(producer.forward(consumer)).unwrap();

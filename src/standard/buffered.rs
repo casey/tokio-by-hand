@@ -1,16 +1,19 @@
 use common::*;
-use standard::common::*;
+use standard;
 
 const BUFFER_SIZE: usize = 10;
 
 pub struct Consumer {
   buffer: VecDeque<u8>,
-  inner:  delayed_series::Consumer,
+  inner:  standard::delayed_series::Consumer,
 }
 
 impl Consumer {
   pub fn new() -> Consumer {
-    Consumer{buffer: VecDeque::with_capacity(BUFFER_SIZE), inner: delayed_series::Consumer::new()}
+    Consumer {
+      buffer: VecDeque::with_capacity(BUFFER_SIZE),
+      inner:  standard::delayed_series::Consumer::new(),
+    }
   }
 
   fn try_buffer(&mut self, item: u8) -> AsyncSink<u8> {
@@ -56,7 +59,7 @@ mod tests {
   fn production_and_consumption_are_concurrent() {
     let mut core = Core::new().unwrap();
     let start = Instant::now();
-    let producer = delayed_series::Producer::new().take(5);
+    let producer = standard::delayed_series::Producer::new().take(5);
     let consumer = Consumer::new();
 
     core.run(producer.forward(consumer)).unwrap();

@@ -4,6 +4,7 @@ extern crate rand;
 extern crate tokio_core;
 extern crate void;
 
+/// Common types used all over the place
 pub mod common {
   pub use futures::prelude::*;
   pub use futures::task;
@@ -20,6 +21,7 @@ pub mod common {
   pub use void::Void;
 }
 
+/// An extended API version of `try_ready!`
 macro_rules! extended_try_ready {
   ( $x:expr ) => {
     {
@@ -36,6 +38,9 @@ macro_rules! extended_try_ready {
   };
 }
 
+/// Simple Futures, Sinks, and Streams using the standard futures API
 pub mod standard;
+
+/// Simple Futures, Sinks, and Streams using the extended futures API
 pub mod extended;
 

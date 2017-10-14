@@ -1,16 +1,16 @@
 use common::*;
-use standard::common::*;
+use standard;
 
 pub struct Producer {
-  inner:   instant::Producer,
-  sleeper: sleeper::Sleeper,
+  inner:   standard::instant::Producer,
+  sleeper: standard::sleeper::Sleeper,
 }
 
 impl Producer {
   pub fn new() -> Producer {
     Producer {
-      inner:   instant::Producer::new(),
-      sleeper: sleeper::Sleeper::new(Duration::new(1, 0)),
+      inner:   standard::instant::Producer::new(),
+      sleeper: standard::sleeper::Sleeper::new(Duration::new(1, 0)),
     }
   }
 }
@@ -35,15 +35,15 @@ impl fmt::Debug for Producer {
 }
 
 pub struct Consumer {
-  inner:   instant::Consumer,
-  sleeper: sleeper::Sleeper,
+  inner:   standard::instant::Consumer,
+  sleeper: standard::sleeper::Sleeper,
 }
 
 impl Consumer {
   pub fn new(value: u8) -> Consumer {
     Consumer {
-      inner:   instant::Consumer::new(value),
-      sleeper: sleeper::Sleeper::new(Duration::new(1, 0)),
+      inner:   standard::instant::Consumer::new(value),
+      sleeper: standard::sleeper::Sleeper::new(Duration::new(1, 0)),
     }
   }
 }

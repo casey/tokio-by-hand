@@ -1,14 +1,14 @@
 use common::*;
-use standard::common::*;
+use standard;
 
 #[derive(Debug)]
 pub struct Producer {
-  next: instant::Producer,
+  next: standard::instant::Producer,
 }
 
 impl Producer {
   pub fn new() -> Producer {
-    Producer{next: instant::Producer::new()}
+    Producer{next: standard::instant::Producer::new()}
   }
 }
 
@@ -17,13 +17,13 @@ impl Stream for Producer {
   type Error = Void;
   fn poll(&mut self) -> Poll<Option<Self::Item>, Self::Error> {
     let next = try_ready!(self.next.poll());
-    self.next = instant::Producer::new();
+    self.next = standard::instant::Producer::new();
     Ok(Async::Ready(Some(next)))
   }
 }
 
 pub struct Consumer {
-  sending: Option<instant::Consumer>,
+  sending: Option<standard::instant::Consumer>,
 }
 
 impl Consumer {
@@ -44,7 +44,7 @@ impl Sink for Consumer {
     if self.sending.is_some() {
       Ok(AsyncSink::NotReady(item))
     } else {
-      self.sending = Some(instant::Consumer::new(item));
+      self.sending = Some(standard::instant::Consumer::new(item));
       Ok(AsyncSink::Ready)
     }
   }
