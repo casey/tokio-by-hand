@@ -50,3 +50,5 @@ In practice, I only did this once in the codebase, in the implementation of `ext
 If delegating to another future, it would have to get the `AgreementToNotify` from a `NotReady` from another future, and it was thus impossible to return `NotReady` without directly or indirectly arranging for the task to be notified.
 
 The extended API made things a _lot_ clearer to me. I understand that it's an extremely verbose API, but I think that it aids greatly in understanding the futures model, makes the contracts of the the traits extremely clear, and moves many errors to compile time. At least, I found that to be the case for me.
+
+I was able to implement `extended::adapter::Adapter` pretty easily, which is sort of a simple version of the future I need to write for the original program, which I'm pretty confident that I'll be able to do now.
