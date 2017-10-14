@@ -1,6 +1,8 @@
 tokio by hand
 =============
 
+[![docs.rs](https://docs.rs/tokio-by-hand/badge.svg)](https://docs.rs/tokio-by-hand)
+
 I've been trying to wrap my head around futures for a while, and it's been a pretty rough ride.
 
 The project that I started off working on was to consume a cryptocurrency exchange market data websocket feed and write it to a database.
