@@ -3,6 +3,8 @@ use standard;
 
 const BUFFER_SIZE: usize = 10;
 
+/// A sink that consumes one item every second, but which can buffer up to
+/// BUFFER_SIZE items
 pub struct Consumer {
   buffer: VecDeque<u8>,
   inner:  standard::delayed_series::Consumer,

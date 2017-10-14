@@ -1,5 +1,6 @@
 use common::*;
 
+/// A future which immediately returns a random `u8`
 #[derive(Debug)]
 pub struct Producer {
   _private: (),
@@ -20,6 +21,7 @@ impl Future for Producer {
   }
 }
 
+/// A future which immediately consumes a random `u8`
 pub struct Consumer {
   _private: (),
 }

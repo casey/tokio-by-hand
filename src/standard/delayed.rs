@@ -1,6 +1,7 @@
 use common::*;
 use standard;
 
+/// A Future that produces a random `u8` after a delay of 1 second
 pub struct Producer {
   inner:   standard::instant::Producer,
   sleeper: standard::sleeper::Sleeper,
@@ -34,6 +35,7 @@ impl fmt::Debug for Producer {
   }
 }
 
+/// A Future that consumes a `u8` after a delay of 1 second
 pub struct Consumer {
   inner:   standard::instant::Consumer,
   sleeper: standard::sleeper::Sleeper,
